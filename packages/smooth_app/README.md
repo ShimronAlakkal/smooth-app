@@ -2,7 +2,7 @@
 
 # Open Food Facts - Codename: "Smooth App"
 
-A new Flutter application by [`Open Food Facts`](https://github.com/openfoodfacts) that can be installed both on [Android](https://play.google.com/store/apps/details?id=org.openfoodfacts.app) or [iOS](https://apps.apple.com/us/app/smooth-app/id1526747703) devices. Use thee internal development build for ([Android](https://play.google.com/apps/internaltest/4700279390303733107) or [iPhone/iPad](https://testflight.apple.com/join/dIhF6Gi4)) if you'd like to use the results of your PRs quicker.
+A new Flutter application by [`Open Food Facts`](https://github.com/openfoodfacts) that can be installed both on [Android](https://play.google.com/store/apps/details?id=org.openfoodfacts.app) or [iOS](https://apps.apple.com/us/app/smooth-app/id1526747703) devices. Use the internal development build for ([Android](https://play.google.com/apps/internaltest/4700279390303733107) or [iPhone/iPad](https://testflight.apple.com/join/dIhF6Gi4)) if you'd like to use the results of your PRs quicker.
 
 
 ## Getting Started
