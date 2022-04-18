@@ -74,14 +74,12 @@
 Widget build(BuildContext context) {
   final ThemeData themeData = Theme.of(context);
   Color? colorFromEvaluation;
-  if (evaluation != null &amp;&amp;
-      (knowledgePanelTitleElement.iconColorFromEvaluation ?? false)) {
-    colorFromEvaluation = _getColorFromEvaluation(evaluation!);
-  }
-  if (evaluation != null &amp;&amp;
-      _getColorFromEvaluation(evaluation!) == null &amp;&amp;
-      themeData.brightness == Brightness.dark) {
-    colorFromEvaluation = Colors.white;
+  if (knowledgePanelTitleElement.iconColorFromEvaluation ?? false) {
+    if (themeData.brightness == Brightness.dark) {
+      colorFromEvaluation = _getColorFromEvaluationDarkMode(evaluation);
+    } else {
+      colorFromEvaluation = _getColorFromEvaluation(evaluation);
+    }
   }
   List&lt;Widget&gt; iconWidget;
   if (knowledgePanelTitleElement.iconUrl != null) {
@@ -103,7 +101,10 @@ Widget build(BuildContext context) {
     iconWidget = &lt;Widget&gt;[];
   }
   return Padding(
-    padding: const EdgeInsets.only(top: SMALL_SPACE),
+    padding: const EdgeInsets.only(
+      top: VERY_SMALL_SPACE,
+      bottom: VERY_SMALL_SPACE,
+    ),
     child: Row(
       children: &lt;Widget&gt;[
         ...iconWidget,
