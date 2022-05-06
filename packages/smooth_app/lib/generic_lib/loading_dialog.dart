@@ -17,12 +17,14 @@ class LoadingDialog<T> {
     required final BuildContext context,
     required final Future<T> future,
     final String? title,
+    final bool? dismissible,
   }) {
     final AppLocalizations? appLocalizations = AppLocalizations.of(context);
     return LoadingDialog<T>._()._run(
       context: context,
       future: future,
       title: title ?? appLocalizations!.loading_dialog_default_title,
+      dismissible: dismissible ?? true,
     );
   }
 
@@ -60,8 +62,10 @@ class LoadingDialog<T> {
     required final BuildContext context,
     required final Future<T> future,
     required final String title,
+    final bool? dismissible,
   }) async =>
       showDialog<T>(
+        barrierDismissible: dismissible ?? true,
         context: context,
         builder: (BuildContext context) {
           return _getDialog(context, title, future);
@@ -89,19 +93,22 @@ class LoadingDialog<T> {
       body: FutureBuilder<T>(
         future: future,
         builder: (BuildContext context, AsyncSnapshot<T> snapshot) {
-          if (snapshot.hasData) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            // Now it's either hasError or successful.
+            // We cannot check hasData because data can be null or void.
+            if (snapshot.hasError) {
+              return ListTile(
+                title: Text(appLocalizations!.error_occurred),
+              );
+            }
             _popDialog(context, snapshot.data);
+            // whatever, anyway we've just pop'ed
             return Container();
-          } else if (snapshot.hasError) {
-            return ListTile(
-              title: Text(appLocalizations!.error_occurred),
-            );
-          } else {
-            return ListTile(
-              leading: const CircularProgressIndicator(),
-              title: Text(title),
-            );
           }
+          return ListTile(
+            leading: const CircularProgressIndicator(),
+            title: Text(title),
+          );
         },
       ),
       actions: <SmoothActionButton>[

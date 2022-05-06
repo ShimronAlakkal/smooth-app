@@ -52,14 +52,14 @@ class SocialHandleView extends StatelessWidget {
               onPressed: () async {
                 final PackageInfo packageInfo =
                     await PackageInfo.fromPlatform();
-                // TODO(M123): Change subject name when we have a different app name
+
                 final Mailto mailtoLink = Mailto(
                   to: <String>['contact@openfoodfacts.org'],
-                  subject: 'Smoothie help', // TODO(monsieurtanuki): localize
+                  subject: 'OpenFoodFacts (Codename: Smoothie) help',
                   body:
                       'Version:${packageInfo.version}+${packageInfo.buildNumber} running on ${Platform.operatingSystem}(${Platform.operatingSystemVersion})',
                 );
-                await launch('$mailtoLink');
+                await launchUrl(Uri.parse('$mailtoLink'));
               },
             ),
           ],
